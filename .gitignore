@@ -1,0 +1,4 @@
+## Háskell ##
+dist/
+*.hi
+*.o
