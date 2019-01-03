@@ -91,8 +91,7 @@ list elemParser = (try commaList) <|> (try colonList)
     tail =
       (do
         colon
-        tl <- elemParser
-        return $ Just tl
+        Just <$> elemParser
       )
       <|>
       (return Nothing)
