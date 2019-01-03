@@ -5,9 +5,12 @@ module Fuspel.Lexer
 , reservedOp
 , parens
 , brackets
-, commaSep
 , integer
 , whiteSpace
+, lexeme
+, colon
+, semi
+, commaSep
 ) where
 
 import Text.Parsec
@@ -23,7 +26,9 @@ reserved   = T.reserved lexer
 reservedOp = T.reservedOp lexer
 parens     = T.parens lexer
 brackets   = T.brackets lexer
-commaSep   = T.commaSep lexer
 integer    = T.integer lexer
 whiteSpace = T.whiteSpace lexer
-
+lexeme     = T.lexeme lexer
+colon      = T.colon lexer
+semi       = T.semi lexer
+commaSep   = T.commaSep lexer

@@ -13,10 +13,10 @@ fuspelDef = emptyDef
     , commentLine = "//"
     , nestedComments = False
     , identStart = lower
-    , identLetter = letter
+    , identLetter = alphaNum <|> char '_'
     , opStart = parserZero -- The language doesn't have infix operators
     , opLetter = parserZero
-    , reservedNames = ["code"]
-    , reservedOpNames = []
+    , reservedNames = ["code", "import"]
+    , reservedOpNames = ["="]
     , caseSensitive = True
     }
