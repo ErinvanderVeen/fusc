@@ -65,14 +65,8 @@ simpleExpression =
     wildcard = symbol "_" >> return SEWildCard
 
 list :: forall a. Parser a -> Parser ([a], Maybe a)
-list elemParser = (try commaList) <|> (try colonList)
+list elemParser = (try colonList) <|> commaList
   where
-    commaList :: Parser ([a], Maybe a)
-    commaList = brackets $ do
-      elems <- commaSep elemParser
-      tail <- tail
-      return (elems, tail)
-
     colonList :: Parser ([a], Maybe a)
     colonList = brackets $ elemParser >>= \hd ->
       colon >> (
@@ -87,14 +81,19 @@ list elemParser = (try commaList) <|> (try colonList)
         )
       )
 
+    commaList :: Parser ([a], Maybe a)
+    commaList = brackets $ do
+      elems <- commaSep elemParser
+      tail <- tail
+      return (elems, tail)
+
     tail :: Parser (Maybe a)
     tail =
-      (do
-        colon
-        Just <$> elemParser
-      )
+        (try (colon >> symbol "[]" >> return Nothing))
       <|>
-      (return Nothing)
+        (colon >> Just <$> elemParser)
+      <|>
+        (return Nothing)
 
 tuple :: Parser a -> Parser (a, a)
 tuple elemParser = do
