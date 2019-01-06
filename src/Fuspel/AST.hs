@@ -5,12 +5,15 @@ import Data.List (intersperse, groupBy)
 
 data Fuspel
   = Fuspel [Import] [Rewrite]
+  deriving(Eq)
 
 data Import
   = Import Name
+  deriving(Eq)
 
 data Rewrite
   = Rewrite Name [SimpleExpression] Expression
+  deriving(Eq)
 
 type Name
   = String
@@ -22,6 +25,7 @@ data SimpleExpression
   | SEList [SimpleExpression] (Maybe SimpleExpression)
   | SETuple SimpleExpression SimpleExpression
   | SEWildCard
+  deriving(Eq)
 
 data Expression
   = EInt Int
@@ -31,10 +35,11 @@ data Expression
   | ETuple Expression Expression
   | EApp Expression Expression
   | ECode Name
+  deriving(Eq)
 
 instance Show Fuspel
   where
-    show (Fuspel imports rules) = (unlines . map show) imports ++ "\n" ++ showRules rules
+    show (Fuspel imports rules) = (unlines . map show) imports ++ "\n" ++ showRules rules ++ "\n"
       where
         showRules = (concat . intersperse "\n\n") . map (concat . intersperse "\n") . map (map show) . groupBy nameEq
           where

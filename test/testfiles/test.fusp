@@ -1,0 +1,5 @@
+import int;
+
+app f a = f a;
+
+add a b = code add a b;
