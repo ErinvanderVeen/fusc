@@ -13,4 +13,4 @@ main :: IO ()
 main = do
   files <- getArgs
   programs <- mapM parseFuspelFile files
-  mapM_ (putStrLn . show) programs
+  mapM_ print programs
