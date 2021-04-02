@@ -1,4 +1,7 @@
-## Háskell ##
+## Haskell ##
 dist/
 *.hi
 *.o
+
+## Nix ##
+result
