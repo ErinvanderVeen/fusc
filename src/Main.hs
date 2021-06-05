@@ -1,13 +1,11 @@
 module Main where
 
-import Prelude hiding(lex)
-import System.Environment
-import System.Exit
-
-import Text.Parsec.Error (ParseError)
-
 import Fuspel.Lexer
 import Fuspel.Parser
+import System.Environment
+import System.Exit
+import Text.Parsec.Error (ParseError)
+import Prelude hiding (lex)
 
 main :: IO ()
 main = do
